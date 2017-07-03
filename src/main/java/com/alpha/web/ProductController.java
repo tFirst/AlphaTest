@@ -2,7 +2,7 @@ package com.alpha.web;
 
 
 import com.alpha.bean.Product;
-import com.alpha.service.IProductService;
+import com.alpha.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,9 +16,9 @@ import java.util.List;
 public class ProductController {
 
     @Autowired
-    private IProductService productService;
+    private ProductRepository productService;
 
-    @RequestMapping(value = "/all", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public List<Product> products() {
         return productService.findAll();
     }

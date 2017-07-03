@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication(scanBasePackages = "com.alpha")
 @EntityScan("com.alpha.bean")
-@EnableJpaRepositories("com.alpha.service")
+@EnableJpaRepositories("com.alpha.repository")
 public class WebApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(WebApplication.class, args);

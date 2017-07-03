@@ -8,10 +8,8 @@ public class Brand {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "Brands")
-    @JoinColumn(name = "id")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "brand_id")
     private Long id;
-    @Column
     private String title;
 
     public Long getId() {

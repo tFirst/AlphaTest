@@ -8,10 +8,8 @@ public class Features {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "Features")
-    @JoinColumn(name = "id")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "feature_id")
     private Long id;
-    @Column
     private String feature;
 
     public Long getId() {

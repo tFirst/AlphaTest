@@ -9,10 +9,8 @@ public class Type {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @OneToMany
-    @JoinColumn(name = "id")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "type_id")
     private Long id;
-    @Column
     private String type;
 
     public Type() {}

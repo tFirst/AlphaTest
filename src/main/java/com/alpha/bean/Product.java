@@ -11,22 +11,19 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @OneToMany
-    @JoinColumn(name = "id")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product_id")
     private Long id;
-    @Column
+    @Column(name = "type_id")
     @ManyToOne
     @JoinColumn(name = "type_id")
     private Set<Long> typeId = new HashSet<>();
-    @Column
+    @Column(name = "brand_id")
     @ManyToOne
     @JoinColumn(name = "brand_id")
     private Set<Long> brandId = new HashSet<>();
-    @Column
+
     private String title;
-    @Column
     private Long count;
-    @Column
     private Long price;
 
     public Long getId() {

@@ -9,13 +9,14 @@ import java.util.Set;
 @Table(name = "Product_Features")
 public class ProductFeatures {
 
+    @Column(name = "product_id")
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Set<Long> productId = new HashSet<>();
+    @Column(name = "feature_id")
     @ManyToOne
     @JoinColumn(name = "feature_id")
     private Set<Long> featureId = new HashSet<>();
-    @Column
     private String value;
 
     public Set<Long> getProductId() {
