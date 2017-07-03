@@ -8,9 +8,9 @@ import javax.persistence.*;
 public class Type {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "type_id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     private String type;
 
     public Type() {}
@@ -20,6 +20,7 @@ public class Type {
         this.type = type;
     }
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "type_id")
     public Long getId() {
         return id;
     }

@@ -10,22 +10,21 @@ import java.util.Set;
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product_id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(name = "type_id")
-    @ManyToOne
-    @JoinColumn(name = "type_id")
-    private Set<Long> typeId = new HashSet<>();
-    @Column(name = "brand_id")
-    @ManyToOne
-    @JoinColumn(name = "brand_id")
-    private Set<Long> brandId = new HashSet<>();
+
+    @ManyToOne(targetEntity = Type.class)
+    @JoinColumn(name = "type")
+    private Set<Type> type = new HashSet<>();
+    @ManyToOne(targetEntity = Brand.class)
+    @JoinColumn(name = "brand")
+    private Set<Brand> brand = new HashSet<>();
 
     private String title;
     private Long count;
     private Long price;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product_id")
     public Long getId() {
         return id;
     }
@@ -34,20 +33,20 @@ public class Product {
         this.id = id;
     }
 
-    public Set<Long> getTypeId() {
-        return typeId;
+    public Set<Type> getType() {
+        return type;
     }
 
-    public void setTypeId(Set<Long> typeId) {
-        this.typeId = typeId;
+    public void setType(Set<Type> type) {
+        this.type = type;
     }
 
-    public Set<Long> getBrandId() {
-        return brandId;
+    public Set<Brand> getBrand() {
+        return brand;
     }
 
-    public void setBrandId(Set<Long> brandId) {
-        this.brandId = brandId;
+    public void setBrand(Set<Brand> brand) {
+        this.brand = brand;
     }
 
     public String getTitle() {

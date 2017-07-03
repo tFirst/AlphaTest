@@ -7,11 +7,12 @@ import javax.persistence.*;
 public class Features {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "feature_id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     private String feature;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "feature_id")
     public Long getId() {
         return id;
     }

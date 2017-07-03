@@ -4,35 +4,44 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-
 @Entity
 @Table(name = "Product_Features")
 public class ProductFeatures {
 
-    @Column(name = "product_id")
-    @ManyToOne
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    @ManyToOne(targetEntity = Product.class)
     @JoinColumn(name = "product_id")
-    private Set<Long> productId = new HashSet<>();
-    @Column(name = "feature_id")
-    @ManyToOne
+    private Set<Product> product = new HashSet<>();
+    @ManyToOne(targetEntity = Features.class)
     @JoinColumn(name = "feature_id")
-    private Set<Long> featureId = new HashSet<>();
+    private Set<Features> feature = new HashSet<>();
     private String value;
 
-    public Set<Long> getProductId() {
-        return productId;
+    public Long getId() {
+        return id;
     }
 
-    public void setProductId(Set<Long> productId) {
-        this.productId = productId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public Set<Long> getFeatureId() {
-        return featureId;
+    public Set<Product> getProduct() {
+        return product;
     }
 
-    public void setFeatureId(Set<Long> featureId) {
-        this.featureId = featureId;
+    public void setProduct(Set<Product> product) {
+        this.product = product;
+    }
+
+    public Set<Features> getFeature() {
+        return feature;
+    }
+
+    public void setFeature(Set<Features> feature) {
+        this.feature = feature;
     }
 
     public String getValue() {

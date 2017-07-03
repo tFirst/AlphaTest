@@ -7,11 +7,12 @@ import javax.persistence.*;
 public class Brand {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "brand_id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     private String title;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "brand_id")
     public Long getId() {
         return id;
     }
