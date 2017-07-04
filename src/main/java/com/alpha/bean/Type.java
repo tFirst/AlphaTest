@@ -13,7 +13,7 @@ public class Type {
 
     private String type;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "Types")
+    @OneToMany(mappedBy = "type", fetch = FetchType.LAZY)
     public long getId() {
         return id;
     }

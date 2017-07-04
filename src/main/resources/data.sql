@@ -1,8 +1,8 @@
-INSERT INTO Brands(title) VALUES('Samsung');
-INSERT INTO Brands(title) VALUES('LG');
-INSERT INTO Brands(title) VALUES('Bosch');
-INSERT INTO Brands(title) VALUES('Hotpoint');
-INSERT INTO Brands(title) VALUES('Sony');
+INSERT INTO Brands(brand) VALUES('Samsung');
+INSERT INTO Brands(brand) VALUES('LG');
+INSERT INTO Brands(brand) VALUES('Bosch');
+INSERT INTO Brands(brand) VALUES('Hotpoint');
+INSERT INTO Brands(brand) VALUES('Sony');
 
 INSERT INTO Types(type) VALUES('Телевизор');
 INSERT INTO Types(type) VALUES('Холодильник');

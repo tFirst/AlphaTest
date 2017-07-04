@@ -12,7 +12,7 @@ public class Brand {
 
     private String brand;
 
-    @OneToMany(mappedBy = "brand")
+    @OneToMany(mappedBy = "brand", fetch = FetchType.LAZY)
     public long getId() {
         return id;
     }
