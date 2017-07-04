@@ -10,7 +10,7 @@ public class ProductFeatures {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private long id;
 
     @ManyToOne(targetEntity = Product.class)
     @JoinColumn(name = "product_id")
@@ -20,11 +20,11 @@ public class ProductFeatures {
     private Set<Features> feature = new HashSet<>();
     private String value;
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 

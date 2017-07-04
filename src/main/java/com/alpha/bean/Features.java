@@ -8,16 +8,16 @@ public class Features {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private long id;
 
     private String feature;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "feature_id")
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 

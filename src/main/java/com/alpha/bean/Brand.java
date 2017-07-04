@@ -8,29 +8,29 @@ public class Brand {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private long id;
 
-    private String title;
+    private String brand;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "brand_id")
-    public Long getId() {
+    @OneToMany(mappedBy = "brand")
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
     public String getTitle() {
-        return title;
+        return brand;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setTitle(String brand) {
+        this.brand = brand;
     }
 
     @Override
     public String toString() {
-        return "Brand {" + "id=" + id + ", title=" + title + '}';
+        return "Brand {" + "id=" + id + ", brand=" + brand + '}';
     }
 }

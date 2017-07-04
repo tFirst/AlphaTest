@@ -16,15 +16,15 @@ import java.util.List;
 public class ProductController {
 
     @Autowired
-    private ProductRepository productService;
+    private ProductRepository productRepository;
 
     @RequestMapping(method = RequestMethod.GET)
     public List<Product> products() {
-        return productService.findAll();
+        return productRepository.findAll();
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Product getProduct(@PathVariable Long id) {
-        return productService.findOne(id);
+        return productRepository.findOne(id);
     }
 }

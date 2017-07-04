@@ -9,23 +9,16 @@ public class Type {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private long id;
 
     private String type;
 
-    public Type() {}
-
-    public Type(Long id, String type) {
-        this.id = id;
-        this.type = type;
-    }
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "type_id")
-    public Long getId() {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "Types")
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 

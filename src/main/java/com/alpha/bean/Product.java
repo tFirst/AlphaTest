@@ -11,25 +11,25 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private long id;
 
     @ManyToOne(targetEntity = Type.class)
     @JoinColumn(name = "type")
-    private Set<Type> type = new HashSet<>();
+    private Set<Type> type = new HashSet<Type>();
     @ManyToOne(targetEntity = Brand.class)
     @JoinColumn(name = "brand")
-    private Set<Brand> brand = new HashSet<>();
+    private Set<Brand> brand = new HashSet<Brand>();
 
     private String title;
-    private Long count;
-    private Long price;
+    private long count;
+    private long price;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "product_id")
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -57,19 +57,19 @@ public class Product {
         this.title = title;
     }
 
-    public Long getCount() {
+    public long getCount() {
         return count;
     }
 
-    public void setCount(Long count) {
+    public void setCount(long count) {
         this.count = count;
     }
 
-    public Long getPrice() {
+    public long getPrice() {
         return price;
     }
 
-    public void setPrice(Long price) {
+    public void setPrice(long price) {
         this.price = price;
     }
 }
