@@ -1,6 +1,7 @@
 package com.alpha.bean;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "Features")
@@ -8,11 +9,14 @@ public class Features {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id_feature")
     private long id;
 
     private String feature;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "feature_id")
+    @OneToMany(mappedBy = "feature", fetch = FetchType.LAZY)
+    private List<ProductFeatures> productFeatures;
+
     public long getId() {
         return id;
     }

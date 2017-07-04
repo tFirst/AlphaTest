@@ -1,6 +1,7 @@
 package com.alpha.bean;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "Brands")
@@ -8,11 +9,13 @@ public class Brand {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id_brand")
     private long id;
+    private String title;
 
-    private String brand;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "brand", fetch = FetchType.LAZY)
+    private List<Product> product;
 
-    @OneToMany(mappedBy = "brand", fetch = FetchType.LAZY)
     public long getId() {
         return id;
     }
@@ -22,15 +25,15 @@ public class Brand {
     }
 
     public String getTitle() {
-        return brand;
+        return title;
     }
 
-    public void setTitle(String brand) {
-        this.brand = brand;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     @Override
     public String toString() {
-        return "Brand {" + "id=" + id + ", brand=" + brand + '}';
+        return "Brand {" + "id=" + id + ", title=" + title + '}';
     }
 }

@@ -3,6 +3,7 @@ package com.alpha.bean;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -11,20 +12,23 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id_product")
     private long id;
 
     @ManyToOne(targetEntity = Type.class)
-    @JoinColumn(name = "type")
+    @JoinColumn(name = "type_id")
     private Set<Type> type = new HashSet<Type>();
     @ManyToOne(targetEntity = Brand.class)
-    @JoinColumn(name = "brand")
+    @JoinColumn(name = "brand_id")
     private Set<Brand> brand = new HashSet<Brand>();
 
     private String title;
     private long count;
     private long price;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product_id")
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+    private List<ProductFeatures> productFeatures;
+
     public long getId() {
         return id;
     }

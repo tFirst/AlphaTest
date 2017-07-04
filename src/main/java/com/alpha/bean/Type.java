@@ -2,6 +2,7 @@ package com.alpha.bean;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "Types")
@@ -9,11 +10,13 @@ public class Type {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id_type")
     private long id;
-
     private String type;
 
-    @OneToMany(mappedBy = "type", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "type", fetch = FetchType.LAZY)
+    private List<Product> product;
+
     public long getId() {
         return id;
     }

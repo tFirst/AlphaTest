@@ -13,10 +13,10 @@ public class ProductFeatures {
     private long id;
 
     @ManyToOne(targetEntity = Product.class)
-    @JoinColumn(name = "product_id")
+    @JoinColumn(name = "id_product")
     private Set<Product> product = new HashSet<>();
     @ManyToOne(targetEntity = Features.class)
-    @JoinColumn(name = "feature_id")
+    @JoinColumn(name = "id_feature")
     private Set<Features> feature = new HashSet<>();
     private String value;
 
