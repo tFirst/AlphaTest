@@ -4,9 +4,9 @@ INSERT INTO Brands(title) VALUES ('Bosch');
 INSERT INTO Brands(title) VALUES ('Hotpoint');
 INSERT INTO Brands(title) VALUES ('Sony');
 
-INSERT INTO Types(type) VALUES ('Телевизор');
-INSERT INTO Types(type) VALUES ('Холодильник');
-INSERT INTO Types(type) VALUES ('Стиральная машина');
+INSERT INTO Types(title) VALUES ('Телевизор');
+INSERT INTO Types(title) VALUES ('Холодильник');
+INSERT INTO Types(title) VALUES ('Стиральная машина');
 
 INSERT INTO Features(feature) VALUES ('Diagonal');
 INSERT INTO Features(feature) VALUES ('Depth');

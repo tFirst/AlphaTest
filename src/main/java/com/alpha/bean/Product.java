@@ -3,7 +3,6 @@ package com.alpha.bean;
 
 import javax.persistence.*;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -15,19 +14,19 @@ public class Product {
     @Column(name = "id_product")
     private long id;
 
-    @ManyToOne(targetEntity = Type.class)
+    @ManyToOne
     @JoinColumn(name = "type_id")
-    private Set<Type> type = new HashSet<Type>();
-    @ManyToOne(targetEntity = Brand.class)
+    private Type type;
+    @ManyToOne
     @JoinColumn(name = "brand_id")
-    private Set<Brand> brand = new HashSet<Brand>();
+    private Brand brand;
 
     private String title;
     private long count;
     private long price;
 
-    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
-    private List<ProductFeatures> productFeatures;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product", fetch = FetchType.LAZY)
+    private Set<ProductFeatures> productFeatures = new HashSet<>();
 
     public long getId() {
         return id;
@@ -37,19 +36,19 @@ public class Product {
         this.id = id;
     }
 
-    public Set<Type> getType() {
+    public Type getType() {
         return type;
     }
 
-    public void setType(Set<Type> type) {
+    public void setType(Type type) {
         this.type = type;
     }
 
-    public Set<Brand> getBrand() {
+    public Brand getBrand() {
         return brand;
     }
 
-    public void setBrand(Set<Brand> brand) {
+    public void setBrand(Brand brand) {
         this.brand = brand;
     }
 

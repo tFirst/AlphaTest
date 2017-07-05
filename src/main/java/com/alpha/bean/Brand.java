@@ -1,7 +1,9 @@
 package com.alpha.bean;
 
+
 import javax.persistence.*;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "Brands")
@@ -13,8 +15,8 @@ public class Brand {
     private long id;
     private String title;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "brand", fetch = FetchType.LAZY)
-    private List<Product> product;
+    @OneToMany(mappedBy = "brand", fetch = FetchType.LAZY)
+    private Set<Product> product = new HashSet<Product>();
 
     public long getId() {
         return id;

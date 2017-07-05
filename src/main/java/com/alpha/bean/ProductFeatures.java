@@ -1,8 +1,6 @@
 package com.alpha.bean;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "Product_Features")
@@ -12,12 +10,12 @@ public class ProductFeatures {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @ManyToOne(targetEntity = Product.class)
-    @JoinColumn(name = "id_product")
-    private Set<Product> product = new HashSet<>();
-    @ManyToOne(targetEntity = Features.class)
-    @JoinColumn(name = "id_feature")
-    private Set<Features> feature = new HashSet<>();
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
+    @ManyToOne
+    @JoinColumn(name = "feature_id")
+    private Features feature;
     private String value;
 
     public long getId() {
@@ -28,19 +26,19 @@ public class ProductFeatures {
         this.id = id;
     }
 
-    public Set<Product> getProduct() {
+    public Product getProduct() {
         return product;
     }
 
-    public void setProduct(Set<Product> product) {
+    public void setProduct(Product product) {
         this.product = product;
     }
 
-    public Set<Features> getFeature() {
+    public Features getFeature() {
         return feature;
     }
 
-    public void setFeature(Set<Features> feature) {
+    public void setFeature(Features feature) {
         this.feature = feature;
     }
 

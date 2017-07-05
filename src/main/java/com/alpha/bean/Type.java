@@ -2,7 +2,8 @@ package com.alpha.bean;
 
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "Types")
@@ -12,10 +13,10 @@ public class Type {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_type")
     private long id;
-    private String type;
+    private String title;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "type", fetch = FetchType.LAZY)
-    private List<Product> product;
+    @OneToMany(mappedBy = "type", fetch = FetchType.LAZY)
+    private Set<Product> product = new HashSet<Product>();
 
     public long getId() {
         return id;
@@ -25,16 +26,16 @@ public class Type {
         this.id = id;
     }
 
-    public String getType() {
-        return type;
+    public String getTitle() {
+        return title;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     @Override
     public String toString() {
-        return "Type {" + "id=" + id + ", type=" + type + '}';
+        return "Type {" + "id=" + id + ", title=" + title + '}';
     }
 }
