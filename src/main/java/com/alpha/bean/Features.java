@@ -11,18 +11,18 @@ public class Features {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_feature")
-    private long id;
+    private Long id;
 
     private String title;
 
     @OneToMany(mappedBy = "feature", fetch = FetchType.LAZY)
     private Set<ProductFeatures> productFeatures = new HashSet<>();
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

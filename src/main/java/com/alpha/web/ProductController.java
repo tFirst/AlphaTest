@@ -1,8 +1,10 @@
 package com.alpha.web;
 
 
+import com.alpha.bean.Brand;
 import com.alpha.bean.Product;
 import com.alpha.bean.ProductFeatures;
+import com.alpha.repository.BrandRepository;
 import com.alpha.repository.ProductFeaturesRepository;
 import com.alpha.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +27,8 @@ public class ProductController implements ErrorController {
     @Autowired
     private ProductFeaturesRepository productFeaturesRepository;
 
-    private final String error = "/error";
+    @Autowired
+    private BrandRepository brandRepository;
 
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<Product>> products() {
@@ -33,9 +36,9 @@ public class ProductController implements ErrorController {
                 (productRepository.findAll(), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/product", method = RequestMethod.GET)
-    public ResponseEntity<Product> getProduct(@RequestParam("id") Long id) {
-        Product product = productRepository.findOne(id);
+    @RequestMapping(value = "/{productId}", method = RequestMethod.GET)
+    public ResponseEntity<Product> getProduct(@PathVariable Long productId) {
+        Product product = productRepository.findOne(productId);
 
         if (product != null)
             return new ResponseEntity<>
@@ -45,9 +48,9 @@ public class ProductController implements ErrorController {
                     ((Product) null, HttpStatus.NOT_FOUND);
     }
 
-    @RequestMapping(value = "/{id}/features", method = RequestMethod.GET)
-    public ResponseEntity<Collection<ProductFeatures>> getProductFeatures(@PathVariable Long id) {
-        Product product = productRepository.findOne(id);
+    @RequestMapping(value = "/{productId}/features", method = RequestMethod.GET)
+    public ResponseEntity<Collection<ProductFeatures>> getProductFeatures(@PathVariable Long productId) {
+        Product product = productRepository.findOne(productId);
 
         if (product != null)
             return new ResponseEntity<>
@@ -57,11 +60,12 @@ public class ProductController implements ErrorController {
                     ((Collection<ProductFeatures>) null, HttpStatus.NOT_FOUND);
     }
 
-    @RequestMapping(value = "/{id}/features/{featureId}", method = RequestMethod.GET)
-    public ResponseEntity<ProductFeatures> getFeature(@PathVariable Long id, @PathVariable Long featId) {
-        ProductFeatures productFeatures = productFeaturesRepository.findOne(featId);
+    @RequestMapping(value = "/{productId}/feature/{featureId}", method = RequestMethod.GET)
+    public ResponseEntity<ProductFeatures> getFeature(@PathVariable Long productId,
+                                                      @PathVariable Long featureId) {
+        ProductFeatures productFeatures = productFeaturesRepository.findOne(featureId);
 
-        Set<ProductFeatures> set = productRepository.findOne(id).getProductFeatures();
+        Set<ProductFeatures> set = productRepository.findOne(productId).getProductFeatures();
 
         if (set.contains(productFeatures)) {
             return new ResponseEntity<>
@@ -72,30 +76,73 @@ public class ProductController implements ErrorController {
         }
     }
 
-    @RequestMapping(value = "/{id}/features/{featureId}", method = RequestMethod.PUT)
-    public ResponseEntity<?> changeFeature
-            (@PathVariable Long prodId,
-             @PathVariable Long featId,
-             @RequestParam("value") String value) {
-        ProductFeatures productFeatures = productFeaturesRepository.findOne(featId);
+    @RequestMapping(value = "/{productId}/feature/{featureId}", method = RequestMethod.PUT)
+    public ResponseEntity<?> changeFeature(@PathVariable Long productId,
+                                           @PathVariable Long featureId,
+                                           @RequestParam("value") String value) {
+        ProductFeatures productFeatures = productFeaturesRepository.findOne(featureId);
 
-        Set<ProductFeatures> set = productRepository.findOne(prodId).getProductFeatures();
+        Set<ProductFeatures> set = productRepository.findOne(productId).getProductFeatures();
 
         if (set.contains(productFeatures)) {
             productFeatures.setValue(value);
-            return new ResponseEntity<>(productFeaturesRepository.save(productFeatures), HttpStatus.OK);
+            return new ResponseEntity<Object>
+                    (productFeaturesRepository.save(productFeatures), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>
+                    (null, HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @RequestMapping(value = "/{productId}", method = RequestMethod.PUT)
+    public ResponseEntity<?> changeProduct(@PathVariable Long productId,
+                                           @RequestParam Long count,
+                                           @RequestParam Long price) {
+        Product product = productRepository.findOne(productId);
+
+        if (product != null) {
+            if (count != null)
+                product.setCount(count);
+            if (price != null)
+                product.setPrice(price);
+            return new ResponseEntity<Object>(productRepository.save(product), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
     }
 
-    @RequestMapping(value = error)
+    @RequestMapping(value = "/{productId}/brand", method = RequestMethod.GET)
+    public ResponseEntity<Brand> getBrand(@PathVariable Long productId) {
+        Product product = productRepository.findOne(productId);
+
+        if (product != null) {
+            return new ResponseEntity<>(product.getBrand(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>((Brand) null, HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @RequestMapping(value = "/{productId}/brand", method = RequestMethod.PUT)
+    public ResponseEntity<?> changeBrand(@PathVariable Long productId,
+                                         @RequestParam Long brandId) {
+        Brand brand = brandRepository.findOne(brandId);
+        Product product = productRepository.findOne(productId);
+
+        if (product != null && brand != null) {
+            product.setBrand(brand);
+            return new ResponseEntity<Object>(productRepository.save(product), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @RequestMapping(value = "/error")
     public String error() {
         return "Error";
     }
 
     @Override
     public String getErrorPath() {
-        return error;
+        return "/error";
     }
 }

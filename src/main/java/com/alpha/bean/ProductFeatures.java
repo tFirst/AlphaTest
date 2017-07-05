@@ -9,7 +9,7 @@ public class ProductFeatures {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "product_id")
@@ -21,11 +21,11 @@ public class ProductFeatures {
 
     private String value;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

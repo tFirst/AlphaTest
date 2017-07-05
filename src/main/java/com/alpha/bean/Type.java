@@ -12,17 +12,17 @@ public class Type {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_type")
-    private long id;
+    private Long id;
     private String title;
 
     @OneToMany(mappedBy = "type", fetch = FetchType.LAZY)
     private Set<Product> product = new HashSet<>();
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
