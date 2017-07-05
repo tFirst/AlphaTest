@@ -13,9 +13,9 @@ public class Features {
     @Column(name = "id_feature")
     private long id;
 
-    private String feature;
+    private String title;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "feature", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "feature", fetch = FetchType.LAZY)
     private Set<ProductFeatures> productFeatures = new HashSet<>();
 
     public long getId() {
@@ -26,11 +26,11 @@ public class Features {
         this.id = id;
     }
 
-    public String getFeature() {
-        return feature;
+    public String getTitle() {
+        return title;
     }
 
-    public void setFeature(String feature) {
-        this.feature = feature;
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

@@ -75,4 +75,12 @@ public class Product {
     public void setPrice(long price) {
         this.price = price;
     }
+
+    public Set<ProductFeatures> getProductFeatures() {
+        return productFeatures;
+    }
+
+    public void setProductFeatures(Set<ProductFeatures> productFeatures) {
+        this.productFeatures = productFeatures;
+    }
 }

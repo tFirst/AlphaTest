@@ -16,7 +16,7 @@ public class Type {
     private String title;
 
     @OneToMany(mappedBy = "type", fetch = FetchType.LAZY)
-    private Set<Product> product = new HashSet<Product>();
+    private Set<Product> product = new HashSet<>();
 
     public long getId() {
         return id;
@@ -36,6 +36,6 @@ public class Type {
 
     @Override
     public String toString() {
-        return "Type {" + "id=" + id + ", title=" + title + '}';
+        return "Type {" + "id = " + id + ", title = " + title + '}';
     }
 }
