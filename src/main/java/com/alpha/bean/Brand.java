@@ -15,7 +15,7 @@ public class Brand {
     private Long id;
     private String title;
 
-    @OneToMany(mappedBy = "brand", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "brand", fetch = FetchType.LAZY)
     private Set<Product> product = new HashSet<Product>();
 
     public Long getId() {

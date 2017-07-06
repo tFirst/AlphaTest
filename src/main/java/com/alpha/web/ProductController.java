@@ -96,8 +96,8 @@ public class ProductController implements ErrorController {
 
     @RequestMapping(value = "/{productId}", method = RequestMethod.PUT)
     public ResponseEntity<?> changeProduct(@PathVariable Long productId,
-                                           @RequestParam Long count,
-                                           @RequestParam Long price) {
+                                           @RequestParam("count") Long count,
+                                           @RequestParam("price") Long price) {
         Product product = productRepository.findOne(productId);
 
         if (product != null) {
@@ -105,7 +105,7 @@ public class ProductController implements ErrorController {
                 product.setCount(count);
             if (price != null)
                 product.setPrice(price);
-            return new ResponseEntity<Object>(productRepository.save(product), HttpStatus.OK);
+            return new ResponseEntity<>(productRepository.save(product), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
@@ -124,15 +124,28 @@ public class ProductController implements ErrorController {
 
     @RequestMapping(value = "/{productId}/brand", method = RequestMethod.PUT)
     public ResponseEntity<?> changeBrand(@PathVariable Long productId,
-                                         @RequestParam Long brandId) {
+                                         @RequestParam("brandId") Long brandId) {
         Brand brand = brandRepository.findOne(brandId);
         Product product = productRepository.findOne(productId);
 
         if (product != null && brand != null) {
             product.setBrand(brand);
-            return new ResponseEntity<Object>(productRepository.save(product), HttpStatus.OK);
+            return new ResponseEntity<>(productRepository.save(product), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @RequestMapping(value = "/{productId}", method = RequestMethod.DELETE)
+    public ResponseEntity<?> deleteProduct(@PathVariable Long productId,
+                                           @RequestParam("action") String action) {
+        Product product = productRepository.findOne(productId);
+
+        if (product != null) {
+            productRepository.delete(product);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 

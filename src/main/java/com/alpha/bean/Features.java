@@ -15,7 +15,7 @@ public class Features {
 
     private String title;
 
-    @OneToMany(mappedBy = "feature", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "feature", fetch = FetchType.LAZY)
     private Set<ProductFeatures> productFeatures = new HashSet<>();
 
     public Long getId() {
