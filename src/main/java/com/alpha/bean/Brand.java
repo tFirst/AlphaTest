@@ -18,6 +18,15 @@ public class Brand {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "brand", fetch = FetchType.LAZY)
     private Set<Product> product = new HashSet<Product>();
 
+    public Brand() {
+
+    }
+
+    public Brand(Long id, String title) {
+        this.id = id;
+        this.title = title;
+    }
+
     public Long getId() {
         return id;
     }

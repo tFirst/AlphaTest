@@ -18,6 +18,15 @@ public class Type {
     @OneToMany(mappedBy = "type", fetch = FetchType.LAZY)
     private Set<Product> product = new HashSet<>();
 
+    public Type() {
+
+    }
+
+    public Type(Long id, String title) {
+        this.id = id;
+        this.title = title;
+    }
+
     public Long getId() {
         return id;
     }

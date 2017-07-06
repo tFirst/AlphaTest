@@ -28,6 +28,19 @@ public class Product {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "product", fetch = FetchType.LAZY)
     private Set<ProductFeatures> productFeatures = new HashSet<>();
 
+    public Product() {
+
+    }
+
+    public Product(Long id, Type type, Brand brand, String title, int count, int price) {
+        this.id = id;
+        this.type = type;
+        this.brand = brand;
+        this.title = title;
+        this.count = count;
+        this.price = price;
+    }
+
     public Long getId() {
         return id;
     }

@@ -37,11 +37,23 @@ public class ProductFeatures {
         this.feature = feature;
     }
 
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
     public String getValue() {
         return value;
     }
 
     public void setValue(String value) {
         this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return "ProductFeatures {" + "id = " + id +
+                ", product = " + product.getTitle() +
+                ", feature = " + feature.getTitle() +
+                ", value = " + value + "}";
     }
 }
