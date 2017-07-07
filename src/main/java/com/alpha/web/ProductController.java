@@ -39,6 +39,18 @@ public class ProductController implements ErrorController {
                 (productRepository.findAll(), HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/brands", method = RequestMethod.GET)
+    public ResponseEntity<Set<Brand>> showBrands() {
+        return new ResponseEntity<>
+                (brandRepository.findAll(), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/types", method = RequestMethod.GET)
+    public ResponseEntity<Set<Type>> showTypes() {
+        return new ResponseEntity<>
+                (typeRepository.findAll(), HttpStatus.OK);
+    }
+
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> addProduct(@RequestParam Long typeId,
                                         @RequestParam Long brandId,
@@ -90,7 +102,6 @@ public class ProductController implements ErrorController {
         Product product = productRepository.findOne(productId);
         Features feature = featuresRepository.findOne(featureId);
 
-        System.out.println(feature + " " + product);
         ProductFeatures productFeatures = new ProductFeatures();
 
         if (product != null && feature != null) {
@@ -118,24 +129,6 @@ public class ProductController implements ErrorController {
         } else {
             return new ResponseEntity<>
                     ((ProductFeatures) null, HttpStatus.NOT_FOUND);
-        }
-    }
-
-    @RequestMapping(value = "/{productId}/feature/{featureId}", method = RequestMethod.PUT)
-    public ResponseEntity<?> changeFeature(@PathVariable Long productId,
-                                           @PathVariable Long featureId,
-                                           @RequestParam String value) {
-        ProductFeatures productFeatures = productFeaturesRepository.findOne(featureId);
-
-        Set<ProductFeatures> set = productRepository.findOne(productId).getProductFeatures();
-
-        if (set.contains(productFeatures)) {
-            productFeatures.setValue(value);
-            return new ResponseEntity<Object>
-                    (productFeaturesRepository.save(productFeatures), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>
-                    (null, HttpStatus.NOT_FOUND);
         }
     }
 
