@@ -13,7 +13,7 @@ The requests for testing the project:
 1. http://locahost:8080/products - for overview all products in warehouse.
 2. http://locahost:8080/products/{productId} - for overview the information
 about the product, which you set as {productId}. For example, the request of the form
-"http://localhost:8080/products/1" will return a response of the form:
+"http://localhost:8080/products/5" will return a response of the form:
 {
     "id": 5,
     "type": {
@@ -69,7 +69,7 @@ for putting the product with parameters which you set as {typeId}, {brandId}, {t
 For example, the request: localhost:8080/products?typeId=3&brandId=1&title=Super washer&count=2&price=15000
 will return a response of the form:
 {
-    "id": 7,
+    "id": 6,
     "type": {
         "id": 3,
         "title": "Стиральная машина"
